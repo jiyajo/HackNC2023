@@ -3,6 +3,8 @@ import './App.css';
 import { BrowserRouter as Router, Routes, Route }
     from 'react-router-dom';
 import Calendar from './pages/Calendar';
+import Home from './pages/Home';
+import Medications from './pages/Medications'
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
     // </div>
     <Router>
       <Routes>
+          <Route path='/my-pill-tracker/' exact element={<Home />} />
+          <Route path='/my-pill-tracker/medications' exact element={<Medications />} />
           <Route path='/my-pill-tracker/calendar' exact element={<Calendar />} />
       </Routes>
     </Router>
