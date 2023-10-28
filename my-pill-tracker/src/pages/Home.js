@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/*import React, { useState } from 'react';
 import { create_user } from '../backend/database'
 
 const LoginForm = () => {
@@ -33,6 +33,49 @@ const LoginForm = () => {
           <input type="text" value={phoneNumber} onChange={handlePhoneNumberChange} />
         </div>
         <button type="submit">Confirm Number</button>
+      </form>
+    </div>
+  );
+};
+
+export default LoginForm;*/
+
+import React, { useState } from 'react';
+import { create_user } from '../backend/database';
+import './LoginForm.css'; // Import a CSS file for additional styling
+
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+
+  const handleUsernameChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    create_user(username, phoneNumber);
+    console.log('Username:', username);
+    console.log('Phone Number:', phoneNumber);
+  };
+
+  return (
+    <div className="login-form-container">
+      <h2 className="form-title">Login Form</h2>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label">Username:</label>
+          <input className="form-input" type="text" value={username} onChange={handleUsernameChange} />
+        </div>
+        <div className="form-group">
+          <label className="form-label">Phone Number:</label>
+          <input className="form-input" type="text" value={phoneNumber} onChange={handlePhoneNumberChange} />
+        </div>
+        <button className="form-button" type="submit">Confirm Number</button>
       </form>
     </div>
   );

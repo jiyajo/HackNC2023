@@ -56,7 +56,7 @@ const Calendar = () => {
       
         let tempEnd = new Date(endDate.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
       
-        
+
 
         dp.events.add({
           start: tempStart.toISOString(),
