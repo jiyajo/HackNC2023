@@ -14,6 +14,15 @@ const styles = {
   }
 };
 
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 const Calendar = () => {
   const calendarRef = useRef()
   let eventNum = 0;
@@ -45,12 +54,15 @@ const Calendar = () => {
         let tempStart = new Date(startDate.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
       
         let tempEnd = new Date(endDate.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
+      
         
+
         dp.events.add({
           start: tempStart.toISOString(),
           end: tempEnd.toISOString(),
           id: DayPilot.guid(),
           text: modal.result,
+          backColor: getRandomColor(),
           eventNumber: eventNum
         });
       }
