@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
-// import "./CalendarStyles.css";
+import { addWeeks, format } from 'date-fns';
 
 const styles = {
   wrap: {
@@ -25,6 +25,27 @@ const Calendar = () => {
     dp.events.update(e);
   };
 
+  const generateWeeklyEvents = (startDate, numberOfWeeks, eventDetails) => {
+    const events = [];
+    let currentDate = new Date(startDate);
+
+    for (let i = 0; i < numberOfWeeks; i++) {
+      const newEvent = {
+        start: currentDate, // Use the current date as the event start
+        end: addWeeks(currentDate, 1), // End date (1 week after the start date)
+        id: DayPilot.guid(),
+        text: eventDetails,
+      };
+
+      events.push(newEvent);
+
+      // Move to the next week
+      currentDate = addWeeks(currentDate, 1);
+    }
+
+    return events;
+  };
+
   const [calendarConfig, setCalendarConfig] = useState({
     viewType: "Week",
     durationBarVisible: false,
@@ -34,12 +55,34 @@ const Calendar = () => {
       const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
       dp.clearSelection();
       if (!modal.result) { return; }
-      dp.events.add({
-        start: args.start,
-        end: args.end,
-        id: DayPilot.guid(),
-        text: modal.result
-      });
+
+      // dp.events.add({
+      //   start: args.start,
+      //   end: args.end,
+      //   id: DayPilot.guid(),
+      //   text: modal.result
+      // });
+
+      let numberOfWeeks = 10;
+      let startDate = new Date(args.start);
+      startDate.setHours(startDate.getHours() - 4, startDate.getMinutes(), startDate.getSeconds(), startDate.getMilliseconds());
+      let endDate = new Date(args.end);
+      endDate.setHours(endDate.getHours() - 4, endDate.getMinutes(), endDate.getSeconds(), endDate.getMilliseconds());
+      for (let i = 0; i < numberOfWeeks; i++) {
+        let tempStart = new Date(startDate.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
+        //tempStart.setHours(startDate.getHours(), startDate.getMinutes(), startDate.getSeconds(), startDate.getMilliseconds());
+      
+        let tempEnd = new Date(endDate.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
+        //tempEnd.setHours(endDate.getHours(), endDate.getMinutes(), endDate.getSeconds(), endDate.getMilliseconds());
+        
+        dp.events.add({
+          start: tempStart.toISOString(),
+          end: tempEnd.toISOString(),
+          id: DayPilot.guid(),
+          text: modal.result
+        });
+      }
+      
     },
     onEventClick: async args => {
       await editEvent(args.e);
@@ -110,6 +153,16 @@ const Calendar = () => {
       }
     }
   });
+
+  // useEffect(() => {
+  //   const startDate = new Date(); // Your initial start date
+  //   const numberOfWeeks = 10; // Number of weeks you want to generate events for
+  //   const eventDetails = 'Your event details here';
+
+  //   const dp = calendarRef.current.control;
+  //   // dp.events.list = weeklyEvents;
+  //   dp.update();
+  // }, []);
   
   return (
     <div style={styles.wrap}>
