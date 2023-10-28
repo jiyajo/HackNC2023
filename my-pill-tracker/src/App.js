@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
+import { DayPilotCalendar } from "@daypilot/daypilot-lite-react";
 
 function App() {
   return (
@@ -7,7 +9,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload!!!!! VARUN
+          Edit <code>src/App.js</code> and save to reload
         </p>
         <a
           className="App-link"
@@ -22,4 +24,16 @@ function App() {
   );
 }
 
-export default App;
+const Calendar = () => {
+  const [config, setConfig] = useState({
+    viewType: "Week"
+  });
+
+  return (
+      <div>
+          <DayPilotCalendar {...config} />
+      </div>
+  );
+}
+
+export default Calendar;
