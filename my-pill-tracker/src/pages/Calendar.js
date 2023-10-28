@@ -111,7 +111,7 @@ const Calendar = () => {
     }
   });
 
-  useEffect(() => {
+  /*useEffect(() => {
     const events = [
       {
         id: 1,
@@ -149,7 +149,72 @@ const Calendar = () => {
     const startDate = "2023-10-02";
 
     calendarRef.current.control.update({startDate, events});
+  }, []);*/
+
+  useEffect(() => {
+    const generateRepeatingEvents = (startDate, endDate, dayOfWeek) => {
+      const events = [];
+      let currentDay = startDate.clone();
+  
+      while (currentDay.isBefore(endDate)) {
+        if (currentDay.day() === dayOfWeek) {
+          events.push({
+            id: DayPilot.guid(),
+            text: "Repeating Event",
+            start: currentDay.setHours(10, 30).toISOString(), // Set the start time (10:30 AM)
+            end: currentDay.addHours(2).toISOString(), // Set the end time (2 hours duration)
+            participants: 2,
+          });
+        }
+        currentDay.add(7, 'days'); // Move to the next week
+      }
+  
+      return events;
+    };
+  
+    const startDate = DayPilot.Date.today().firstDayOfWeek();
+    const endDate = startDate.addWeeks(4); // Generate events for the next 4 weeks (adjust as needed)
+    const repeatingEvents = generateRepeatingEvents(startDate, endDate, DayPilot.Date.Wednesday);
+  
+    const initialEvents = [
+      {
+        id: 1,
+        text: "Event 1",
+        start: "2023-10-02T10:30:00",
+        end: "2023-10-02T13:00:00",
+        participants: 2,
+      },
+      {
+        id: 2,
+        text: "Event 2",
+        start: "2023-10-03T09:30:00",
+        end: "2023-10-03T11:30:00",
+        backColor: "#6aa84f",
+        participants: 1,
+      },
+      {
+        id: 3,
+        text: "Event 3",
+        start: "2023-10-03T12:00:00",
+        end: "2023-10-03T15:00:00",
+        backColor: "#f1c232",
+        participants: 3,
+      },
+      {
+        id: 4,
+        text: "Event 4",
+        start: "2023-10-01T11:30:00",
+        end: "2023-10-01T14:30:00",
+        backColor: "#cc4125",
+        participants: 4,
+      },
+    ];
+  
+    const allEvents = [...initialEvents, ...repeatingEvents];
+  
+    calendarRef.current.control.update({ startDate, events: allEvents });
   }, []);
+  
 
   return (
     <div style={styles.wrap}>
