@@ -18,7 +18,7 @@ function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
   for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+    color += letters[9 + Math.floor(Math.random() * 7)];
   }
   return color;
 }
@@ -50,6 +50,7 @@ const Calendar = () => {
       startDate.setHours(startDate.getHours() - 4, startDate.getMinutes(), startDate.getSeconds(), startDate.getMilliseconds());
       let endDate = new Date(args.end);
       endDate.setHours(endDate.getHours() - 4, endDate.getMinutes(), endDate.getSeconds(), endDate.getMilliseconds());
+      let background = getRandomColor();
       for (let i = 0; i < numberOfWeeks; i++) {
         let tempStart = new Date(startDate.getTime() + (i * 7 * 24 * 60 * 60 * 1000));
       
@@ -62,7 +63,7 @@ const Calendar = () => {
           end: tempEnd.toISOString(),
           id: DayPilot.guid(),
           text: modal.result,
-          backColor: getRandomColor(),
+          backColor: background,
           eventNumber: eventNum
         });
       }
