@@ -1,39 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
-import {useState} from 'react';
-import { DayPilotCalendar } from "@daypilot/daypilot-lite-react";
+import { BrowserRouter as Router, Routes, Route }
+    from 'react-router-dom';
+import Calendar from './pages/Calendar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <p>
+    //       Edit <code>src/App.js</code> and save to reload
+    //     </p>
+    //     <a
+    //       className="App-link"
+    //       href="https://reactjs.org"
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //     >
+    //       Learn React
+    //     </a>
+    //   </header>
+    // </div>
+    <Router>
+      <Routes>
+          <Route path='/my-pill-tracker/calendar' exact element={<Calendar />} />
+      </Routes>
+    </Router>
   );
 }
 
-const Calendar = () => {
-  const [config, setConfig] = useState({
-    viewType: "Week"
-  });
-
-  return (
-      <div>
-          <DayPilotCalendar {...config} />
-      </div>
-  );
-}
-
-export default Calendar;
+export default App;
