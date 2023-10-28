@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/my-pill-tracker/static/css/main.073c9b0a.css",
+    "main.js": "/my-pill-tracker/static/js/main.92400d62.js",
+    "static/js/787.16c41ee5.chunk.js": "/my-pill-tracker/static/js/787.16c41ee5.chunk.js",
+    "static/media/logo.svg": "/my-pill-tracker/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/my-pill-tracker/index.html",
+    "main.073c9b0a.css.map": "/my-pill-tracker/static/css/main.073c9b0a.css.map",
+    "main.92400d62.js.map": "/my-pill-tracker/static/js/main.92400d62.js.map",
+    "787.16c41ee5.chunk.js.map": "/my-pill-tracker/static/js/787.16c41ee5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.92400d62.js"
+  ]
+}
