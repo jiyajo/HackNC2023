@@ -5,4 +5,4 @@ const Pill = () => {
   
 };
 
-export default LoginForm;
+export default Pill;
