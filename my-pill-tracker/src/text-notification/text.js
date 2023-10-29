@@ -1,9 +1,8 @@
-const { CourierClient } = require("@trycourier/courier");
-const courier = CourierClient({ authorizationToken: "dk_prod_GVH0BTETMT42B1KR48XTCNSNV6PA" });
+import { courier } from '../courier-config'
 
 const dosage = "1 pill";
-const medication = "lexapro";
-const note = "Make sure to take it!";
+const medication = "Lexapro";
+const note = "Take with water!";
 
 const { requestId } = courier.send({
 
@@ -19,7 +18,7 @@ const { requestId } = courier.send({
 
       },
 
-      phone_number: "4133366310",
+      phone_number: "",
 
     },
 
