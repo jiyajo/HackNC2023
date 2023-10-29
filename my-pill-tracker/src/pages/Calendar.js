@@ -49,7 +49,7 @@ const Calendar = () => {
     for (let i = 0; i < pills.length; i++) {
       let day = pills[i][0];
       for (let j = 0; j < days.length; j++) {
-        if (day == days[j]) {
+        if (day === days[j]) {
           dayNum = j;
         }
       }
@@ -225,8 +225,8 @@ const Calendar = () => {
           selectMode={"Week"}
           showMonths={3}
           skipMonths={3}
-          startDate={"2023-10-02"}
-          selectionDay={"2023-10-02"}
+          startDate={"2023-10-29"}
+          selectionDay={"2023-10-29"}
           onTimeRangeSelected={ args => {
             calendarRef.current.control.update({
               startDate: args.day
@@ -241,7 +241,7 @@ const Calendar = () => {
         />
       </div>
       <Link to="/my-pill-tracker/medications">
-        <button class="form-button">Add a Medication.</button>
+        <button class="form-button">+ Add a Medication</button>
       </Link>
     </div>
     

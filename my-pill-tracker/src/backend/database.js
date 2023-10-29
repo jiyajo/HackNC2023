@@ -12,9 +12,10 @@ export async function create_user(name, phoneNumber) {
       username: name,
       phoneNumber: phoneNumber
     });
-      console.log('User added to Firestore.');
+      console.log('User success');
       username = name;
       localStorage.setItem('username', name);
+      window.location.href = '/my-pill-tracker/calendar';
     } catch (error) {
       console.error('Error adding user to Firestore:', error);
     }
@@ -43,6 +44,27 @@ export async function add_pills(userId, dosage, isNotified, pillName, time, day,
 
 // Function to get pill schedule
 export async function getPillSchedule() {
+  const usersCollectionRef = collection(db, 'users');
+  const DocRef = doc(usersCollectionRef, username);
+  const notificationsCollectionRef = collection(DocRef, 'notifications');
+  const docSnap = await getDocs(notificationsCollectionRef);
+
+  console.log(username)
+  const resultArray = [];
+  docSnap.forEach((doc) => {
+    const data = doc.data();
+    const day = data.day;
+    const time = data.time;
+    const pillName = data.pillName;
+    console.log(day + " " + time)
+    resultArray.push([day, time, pillName]); // Add an array of [day, time] to the resultArray
+  });
+
+  console.log(resultArray)
+  return resultArray;
+}
+
+export async function getPillData() {
   const usersCollectionRef = collection(db, 'users');
   const DocRef = doc(usersCollectionRef, username);
   const notificationsCollectionRef = collection(DocRef, 'notifications');

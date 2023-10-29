@@ -97,6 +97,13 @@ const PillForm = () => {
     console.log('Time:', time);
     console.log('day:', day);
     console.log('Notes:', notes);
+
+    // Reset fields
+    setPillName('');
+    setDay('');
+    setDosage('');
+    setTime('');
+    setNotes('');
   };
 
   return (
@@ -179,11 +186,11 @@ const PillForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button class="form-button" onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
+            <Button onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
               Submit
             </Button>
             <Link to="/my-pill-tracker/calendar">
-              <button class="form-button">Back to Calendar.</button>
+              <button class="form-button">Back to Calendar</button>
             </Link>
           </Grid>
         </Grid>
