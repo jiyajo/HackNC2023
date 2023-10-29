@@ -99,7 +99,7 @@ const PillForm = () => {
   };
 
   return (
-    <div className="login-form-container">
+    <div className="medication-form-container">
       <h2 className="form-title">Add Medications</h2>
       <form className="form">
         <Grid container spacing={2}>
