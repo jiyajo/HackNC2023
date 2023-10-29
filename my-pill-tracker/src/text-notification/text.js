@@ -1,6 +1,6 @@
 import { courier } from '../courier-config'
 
-const dosage = "1 pill";
+const dosage = "2";
 const medication = "Lexapro";
 const note = "Take with water!";
 

@@ -54,7 +54,7 @@ const LoginForm = () => {
           <label className="form-label">Phone Number:</label>
           <input className="form-input" type="text" value={phoneNumber} onChange={handlePhoneNumberChange} />
         </div>
-        <button className="form-button" type="submit">Confirm Number</button>
+        <button className="form-button" type="submit">Log In</button>
       </form>
     </div>
   );

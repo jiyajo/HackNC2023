@@ -240,9 +240,18 @@ const Calendar = () => {
           ref={calendarRef}
         />
       </div>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+    <div>
       <Link to="/my-pill-tracker/medications">
-        <button class="form-button">+ Add a Medication</button>
+        <button className="form-button">+ Add a Medication</button>
       </Link>
+    </div>
+    <div style={{ margin: "10px 0" }}>
+      <Link to="/my-pill-tracker/">
+        <button className="form-button">Back to Login</button>
+      </Link>
+    </div>
+  </div>
     </div>
     
   );

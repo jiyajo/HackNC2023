@@ -90,6 +90,7 @@ const PillForm = () => {
 
   const handleSubmit = (event) => {
     add_pills(username, dosage, false, pillName, time, day, notes);
+    // Send text instantly for demo - Call function to run text.js with dosage, medication, note, and phone #
     event.preventDefault();
     console.log('Username:', username);
     console.log('Dosage:', dosage);
