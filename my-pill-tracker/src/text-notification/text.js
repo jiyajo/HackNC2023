@@ -1,4 +1,4 @@
-import { courier } from '../courier-config'
+import { courier } from '../../courier-config.js'
 
 const dosage = "2";
 const medication = "Lexapro";
@@ -18,7 +18,7 @@ const { requestId } = courier.send({
 
       },
 
-      phone_number: "",
+      phone_number: "4133366310",
 
     },
 
