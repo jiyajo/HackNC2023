@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import { add_pills, username } from '../backend/database';
+import './LoginForm.css'; // Import a CSS file for additional styling
 
 const daysOfWeek = [
   'Monday',
@@ -98,88 +99,91 @@ const PillForm = () => {
   };
 
   return (
-    <form>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <TextField
-            label="Pill Name"
-            variant="outlined"
-            fullWidth
-            value={pillName}
-            onChange={handlePillChange}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <InputLabel id="day-label">Day of the Week</InputLabel>
-          <Select
-            labelId="day-label"
-            id="day"
-            variant="outlined"
-            fullWidth
-            value={day}
-            onChange={handleDayChange}
-          >
-            {daysOfWeek.map((day) => (
-              <MenuItem key={day} value={day}>
-                {day}
-              </MenuItem>
-            ))}
-          </Select>
-        </Grid>
-        <Grid item xs={12}>
-          <InputLabel id="dosage-label">Dosage (# of pieces)</InputLabel>
-          <Select
-            labelId="dosage-label"
-            id="dosage"
-            variant="outlined"
-            fullWidth
-            value={dosage}
-            onChange={handleDosageChange}
-          >
-            {dosages.map((dosage) => (
-              <MenuItem key={dosage} value={dosage}>
-                {dosage}
-              </MenuItem>
-            ))}
-          </Select>
-        </Grid>
-        <Grid item xs={12}>
-          <FormControl variant="outlined" className={classes.formControl}>
-            <InputLabel htmlFor="time">Time of Day</InputLabel>
+    <div className="login-form-container">
+      <h2 className="form-title">Add Medications</h2>
+      <form className="form">
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <TextField
+              label="Pill Name"
+              variant="outlined"
+              fullWidth
+              value={pillName}
+              onChange={handlePillChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <InputLabel id="day-label">Day of the Week</InputLabel>
             <Select
-              labelId="time"
-              id="time"
-              label="Time of Day"
-              defaultValue={timesOfDay[0]}
-              value={time}
-              onChange={handleTimeChange}
+              labelId="day-label"
+              id="day"
+              variant="outlined"
+              fullWidth
+              value={day}
+              onChange={handleDayChange}
             >
-              {timesOfDay.map((time, index) => (
-                <MenuItem key={index} value={time}>
-                  {time}
+              {daysOfWeek.map((day) => (
+                <MenuItem key={day} value={day}>
+                  {day}
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <InputLabel id="dosage-label">Dosage (# of pieces)</InputLabel>
+            <Select
+              labelId="dosage-label"
+              id="dosage"
+              variant="outlined"
+              fullWidth
+              value={dosage}
+              onChange={handleDosageChange}
+            >
+              {dosages.map((dosage) => (
+                <MenuItem key={dosage} value={dosage}>
+                  {dosage}
+                </MenuItem>
+              ))}
+            </Select>
+          </Grid>
+          <Grid item xs={12}>
+            <FormControl variant="outlined" className={classes.formControl}>
+              <InputLabel htmlFor="time">Time of Day</InputLabel>
+              <Select
+                labelId="time"
+                id="time"
+                label="Time of Day"
+                defaultValue={timesOfDay[0]}
+                value={time}
+                onChange={handleTimeChange}
+              >
+                {timesOfDay.map((time, index) => (
+                  <MenuItem key={index} value={time}>
+                    {time}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              label="Additional Notes"
+              multiline
+              minRows={4}
+              variant="outlined"
+              fullWidth
+              value={notes}
+              onChange={handleNotes}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Button onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
+              Submit
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12}>
-          <TextField
-            label="Additional Notes"
-            multiline
-            minRows={4}
-            variant="outlined"
-            fullWidth
-            value={notes}
-            onChange={handleNotes}
-          />
-        </Grid>
-        <Grid item xs={12}>
-          <Button onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
-            Submit
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      </form>
+    </div>
   );
 };
 
