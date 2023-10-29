@@ -1,24 +1,27 @@
-import { collection, addDoc, doc } from 'firebase/firestore'
+import { collection, addDoc, doc, setDoc } from 'firebase/firestore'
 import { db } from '../firebase-config'
 
 // Function to create new user
 // Param: Name, phone #
+
+export let username = '';
+
 export async function create_user(name, phoneNumber) {
-    try {
-      const collectionRef = collection(db, 'users');
-        await addDoc(collectionRef, {
-            username: name,
-            phoneNumber: phoneNumber
-        });
-        console.log('User ${name} ${phoneNumber} added to Firestore.');
-      } catch (error) {
-        console.error('Error adding user to Firestore:', error);
-      }
+  try {
+    await setDoc(doc(db, "users", name), {
+      username: name,
+      phoneNumber: phoneNumber
+    });
+      console.log('User added to Firestore.');
+      username = name
+    } catch (error) {
+      console.error('Error adding user to Firestore:', error);
+    }
 }
 
 // Function to add pills to user's schedule
 // Param: Pill Name, Dosage, Time of Day
-export async function add_pills(userId, dosage, isNotified, pillName, time) {
+export async function add_pills(userId, dosage, isNotified, pillName, time, day, notes) {
   try {
       const userDocRef = doc(db, 'users', userId); // Replace with the actual user ID
       const subcollectionRef = collection(userDocRef, 'notifications');
@@ -27,13 +30,21 @@ export async function add_pills(userId, dosage, isNotified, pillName, time) {
           dosage: dosage,
           isNotified: isNotified,
           pillName: pillName,
-          time: time
+          time: time,
+          day: day,
+          notes: notes
       });
       console.log('Document added to the subcollection.');
   } catch (error) {
       console.error('Error adding document to the subcollection:', error);
   }
 }
+
+// Function to get user
+// export async function getUser() {
+//   console.log(username)
+//   return username
+// }
 
 // Function to send notifications
 // Param: deviceID

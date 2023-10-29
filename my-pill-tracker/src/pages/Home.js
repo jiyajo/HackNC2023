@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { create_user } from '../backend/database'
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -16,6 +18,7 @@ const LoginForm = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     create_user(username, phoneNumber);
+    navigate("/my-pill-tracker/medications");
     console.log('Username:', username);
     console.log('Phone Number:', phoneNumber);
   };
