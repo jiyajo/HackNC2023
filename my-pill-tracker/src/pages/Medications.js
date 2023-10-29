@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { add_pills, getUser, username } from '../backend/database';
+import { add_pills, username } from '../backend/database';
 
 const daysOfWeek = [
   'Monday',

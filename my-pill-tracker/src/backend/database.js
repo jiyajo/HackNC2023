@@ -40,11 +40,5 @@ export async function add_pills(userId, dosage, isNotified, pillName, time, day,
   }
 }
 
-// Function to get user
-// export async function getUser() {
-//   console.log(username)
-//   return username
-// }
-
 // Function to send notifications
 // Param: deviceID
