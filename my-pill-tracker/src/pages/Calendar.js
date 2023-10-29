@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
-import { addWeeks, format } from 'date-fns';
+import { getPillSchedule } from '../backend/database'
+
+getPillSchedule();
+
 
 const styles = {
   wrap: {
@@ -139,16 +142,6 @@ const Calendar = () => {
       }
     }
   });
-
-  // useEffect(() => {
-  //   const startDate = new Date(); // Your initial start date
-  //   const numberOfWeeks = 10; // Number of weeks you want to generate events for
-  //   const eventDetails = 'Your event details here';
-
-  //   const dp = calendarRef.current.control;
-  //   // dp.events.list = weeklyEvents;
-  //   dp.update();
-  // }, []);
   
   return (
     <div style={styles.wrap}>

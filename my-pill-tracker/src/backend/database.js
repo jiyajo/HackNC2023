@@ -1,4 +1,4 @@
-import { collection, addDoc, doc, setDoc } from 'firebase/firestore'
+import { collection, addDoc, doc, setDoc, getDocs } from 'firebase/firestore'
 import { db } from '../firebase-config'
 
 // Function to create new user
@@ -38,6 +38,26 @@ export async function add_pills(userId, dosage, isNotified, pillName, time, day,
   } catch (error) {
       console.error('Error adding document to the subcollection:', error);
   }
+}
+
+// Function to get pill schedule
+export async function getPillSchedule() {
+  const usersCollectionRef = collection(db, 'users');
+  const DocRef = doc(usersCollectionRef, username);
+  const notificationsCollectionRef = collection(DocRef, 'notifications');
+  const docSnap = await getDocs(notificationsCollectionRef);
+
+  const resultArray = [];
+  docSnap.forEach((doc) => {
+    const data = doc.data();
+    const day = data.day;
+    const time = data.time;
+    console.log(day + " " + time)
+    resultArray.push([day, time]); // Add an array of [day, time] to the resultArray
+  });
+
+  console.log(resultArray)
+  return resultArray;
 }
 
 // Function to send notifications
