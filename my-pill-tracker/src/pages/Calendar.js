@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
 import { getPillSchedule } from '../backend/database'
+import { Link } from 'react-router-dom';
+import './LoginForm.css'; // Import a CSS file for additional styling
+
 
 const styles = {
   wrap: {
@@ -55,9 +58,9 @@ const Calendar = () => {
       const [time, period] = timeString.split(' ');
       const [hours, minutes] = time.split(':');
       let hours24 = parseInt(hours, 10);
-      if (period === 'pm' && hours24 < 12) {
+      if (period === 'PM' && hours24 < 12) {
         hours24 += 12;
-      } else if (period === 'am' && hours24 === 12) {
+      } else if (period === 'AM' && hours24 === 12) {
         hours24 = 0;
       }
   
@@ -237,7 +240,11 @@ const Calendar = () => {
           ref={calendarRef}
         />
       </div>
+      <Link to="/my-pill-tracker/medications">
+        <button class="form-button">Add a Medication.</button>
+      </Link>
     </div>
+    
   );
 }
 

@@ -7,6 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { Link } from 'react-router-dom';
 import { add_pills, username } from '../backend/database';
 import './LoginForm.css'; // Import a CSS file for additional styling
 
@@ -100,6 +101,7 @@ const PillForm = () => {
 
   return (
     <div className="medication-form-container">
+      
       <h2 className="form-title">Add Medications</h2>
       <form className="form">
         <Grid container spacing={2}>
@@ -180,6 +182,9 @@ const PillForm = () => {
             <Button class="form-button" onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
               Submit
             </Button>
+            <Link to="/my-pill-tracker/calendar">
+              <button class="form-button">Back to Calendar.</button>
+            </Link>
           </Grid>
         </Grid>
       </form>
