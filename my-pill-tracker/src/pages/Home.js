@@ -32,7 +32,18 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="login-form-container">
+    <div className="login-form-container" style={{ marginTop: '140px', display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',}}>
+    <div style={{ position: 'inherit', marginTop: '-170px', marginBottom: '50px'}}>
+        <img
+          src={require('./MyPillTrackerLogo.jpg')}
+          alt="MyPillTracker Logo"
+          width="100"
+          height="100"
+          className="image-style"
+        />
+      </div>
       <h2 className="form-title">Login Form</h2>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
