@@ -24,9 +24,13 @@ function getRandomColor() {
 }
 
 const Calendar = () => {
-  getPillSchedule();
+  
+  //let pills = getPillSchedule();
+  const [pills, setPills] = useState([]);
   const calendarRef = useRef()
   let eventNum = 0;
+  let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  let dayNum = 0;
 
   const editEvent = async (e) => {
     const dp = calendarRef.current.control;
@@ -35,6 +39,58 @@ const Calendar = () => {
     e.data.text = modal.result;
     dp.events.update(e);
   };
+
+  function makeCalendarRefs() {
+    console.log("in make calendar.");
+    const dp = calendarRef.current.control;
+    for (let i = 0; i < pills.length; i++) {
+      let day = pills[i][0];
+      for (let j = 0; j < days.length; j++) {
+        if (day == days[j]) {
+          dayNum = j;
+        }
+      }
+  
+      let timeString = pills[i][1];
+      const [time, period] = timeString.split(' ');
+      const [hours, minutes] = time.split(':');
+      let hours24 = parseInt(hours, 10);
+      if (period === 'pm' && hours24 < 12) {
+        hours24 += 12;
+      } else if (period === 'am' && hours24 === 12) {
+        hours24 = 0;
+      }
+  
+      let startDate = new Date();
+      startDate.setDate(startDate.getDate() + (dayNum !== startDate.getDay() ? (dayNum - 7 - startDate.getDay()) % 7 : 7));
+      startDate.setHours(hours24, parseInt(minutes, 10), 0, 0);
+      console.log(startDate);
+  
+  
+      let endDate = new Date();
+      endDate.setDate(endDate.getDate() + (dayNum !== endDate.getDay() ? (dayNum - 7 - endDate.getDay()) % 7 : 7))
+      endDate.setHours(hours24, parseInt(minutes, 10) + 30, 0, 0);
+      
+      let numOfWeeks = 10;
+      let background = getRandomColor();
+  
+      for (let k = 0; k < numOfWeeks; k++) {
+        let tempStart = new Date(startDate.getTime() + (k * 7 * 24 * 60 * 60 * 1000));
+        
+        let tempEnd = new Date(endDate.getTime() + (k * 7 * 24 * 60 * 60 * 1000));
+  
+        dp.events.add({
+          start: tempStart.toISOString(),
+          end: tempEnd.toISOString(),
+          id: DayPilot.guid(),
+          text: pills[i][2],
+          backColor: background,
+          eventNumber: eventNum
+        });
+      }
+      eventNum++;
+    }
+  }
 
   const [calendarConfig, setCalendarConfig] = useState({
     viewType: "Week",
@@ -122,7 +178,6 @@ const Calendar = () => {
         }
       ];
 
-
       const participants = args.data.participants;
       if (participants > 0) {
         // show one icon for each participant
@@ -140,6 +195,25 @@ const Calendar = () => {
       }
     }
   });
+
+  useEffect(() => {
+    const fetchPills = async () => {
+      try {
+        const pillsData = await getPillSchedule();
+        setPills(pillsData);
+      } catch (error) {
+        // Handle errors, log, or set default data
+        console.error("Error fetching pills data:", error);
+        setPills([]); // Set default data or handle errors
+      }
+    };
+
+    fetchPills();
+  }, []);
+
+  useEffect(() => {
+    makeCalendarRefs();
+  }, [pills]);
   
   return (
     <div style={styles.wrap}>
