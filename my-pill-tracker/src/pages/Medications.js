@@ -147,7 +147,7 @@ const PillForm = () => {
             </Select>
           </Grid>
           <Grid item xs={12}>
-            <FormControl variant="outlined" className={classes.formControl}>
+            <FormControl variant="outlined" className={classes.formControl} style={{ minWidth: 300 }}>
               <InputLabel htmlFor="time">Time of Day</InputLabel>
               <Select
                 labelId="time"
@@ -177,7 +177,7 @@ const PillForm = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
+            <Button class="form-button" onClick={handleSubmit} variant="contained" color="primary" className={classes.button}>
               Submit
             </Button>
           </Grid>
