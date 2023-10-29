@@ -2,9 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { DayPilot, DayPilotCalendar, DayPilotNavigator } from "@daypilot/daypilot-lite-react";
 import { getPillSchedule } from '../backend/database'
 
-getPillSchedule();
-
-
 const styles = {
   wrap: {
     display: "flex"
@@ -27,6 +24,7 @@ function getRandomColor() {
 }
 
 const Calendar = () => {
+  getPillSchedule();
   const calendarRef = useRef()
   let eventNum = 0;
 

@@ -4,7 +4,7 @@ import { db } from '../firebase-config'
 // Function to create new user
 // Param: Name, phone #
 
-export let username = '';
+export let username = localStorage.getItem('username') || '-';
 
 export async function create_user(name, phoneNumber) {
   try {
@@ -13,7 +13,8 @@ export async function create_user(name, phoneNumber) {
       phoneNumber: phoneNumber
     });
       console.log('User added to Firestore.');
-      username = name
+      username = name;
+      localStorage.setItem('username', name);
     } catch (error) {
       console.error('Error adding user to Firestore:', error);
     }
@@ -47,13 +48,15 @@ export async function getPillSchedule() {
   const notificationsCollectionRef = collection(DocRef, 'notifications');
   const docSnap = await getDocs(notificationsCollectionRef);
 
+  console.log(username)
   const resultArray = [];
   docSnap.forEach((doc) => {
     const data = doc.data();
     const day = data.day;
     const time = data.time;
+    const pillName = data.pillName;
     console.log(day + " " + time)
-    resultArray.push([day, time]); // Add an array of [day, time] to the resultArray
+    resultArray.push([day, time, pillName]); // Add an array of [day, time] to the resultArray
   });
 
   console.log(resultArray)
