@@ -63,13 +63,13 @@ const Calendar = () => {
   
       let startDate = new Date();
       startDate.setDate(startDate.getDate() + (dayNum !== startDate.getDay() ? (dayNum - 7 - startDate.getDay()) % 7 : 7));
-      startDate.setHours(hours24, parseInt(minutes, 10), 0, 0);
+      startDate.setHours(hours24 - 4, parseInt(minutes, 10), 0, 0);
       console.log(startDate);
   
   
       let endDate = new Date();
       endDate.setDate(endDate.getDate() + (dayNum !== endDate.getDay() ? (dayNum - 7 - endDate.getDay()) % 7 : 7))
-      endDate.setHours(hours24, parseInt(minutes, 10) + 30, 0, 0);
+      endDate.setHours(hours24 - 4, parseInt(minutes, 10) + 30, 0, 0);
       
       let numOfWeeks = 10;
       let background = getRandomColor();
